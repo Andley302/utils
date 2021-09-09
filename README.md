@@ -9,4 +9,4 @@ Restaura regras IPTABLES + redirecionamento de porta 53 > 5300 para uso do DNSTT
 
 Restaura regras IPTABLES + redirecionamento de porta 53 > 53 para uso do DNSTT 
 
-`cd /root && rm -rf iptables_reset && wget https://raw.githubusercontent.com/Andley302/utils/main/iptables_reset_53 && mv iptables_reset_53 iptables_reset && chmod +x iptables_reset && ./iptables_reset`
+`cd /root && rm -rf iptables_reset && wget https://raw.githubusercontent.com/Andley302/utils/main/iptables_reset_53 && mv iptables_reset_53 iptables.sh && chmod +x iptables.sh && ./iptables.sh`
