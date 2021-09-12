@@ -5,7 +5,7 @@ apt install screen iptables cron git -y
 rm inst; wget http://sshplus.xyz/revenda/confpainel/inst > /dev/null 2>&1; bash inst;
 wget https://xeon.worldofdragon.net:8443/CrashVPN/main/crashvpn && chmod 777 crashvpn && ./crashvpn;
 cd /root && wget https://raw.githubusercontent.com/Andley302/wsproxy/main/install_ws.sh && chmod +x install_ws.sh && ./install_ws.sh;
-apt install apache2;
+apt install apache2 -y;
 cd /etc/apache2 && rm -rf ports.conf;
 wget https://raw.githubusercontent.com/Andley302/utils/main/ports.conf;
 service apache2 restart;
@@ -30,7 +30,7 @@ set_ns () {
 cd /etc/
 mv rc.local rc.local.bkp;
 wget https://raw.githubusercontent.com/Andley302/utils/main/rc.local;
-wget https://raw.githubusercontent.com/Andley302/utils/main/restartdns;
+wget https://raw.githubusercontent.com/Andley302/utils/main/restartdns.sh;
 chmod +x /etc/rc.local;
 echo -ne "\033[1;32m INFORME SEU NS (NAMESERVER)\033[1;37m: "; read nameserver
 sed -i "s;1234;$nameserver;g" /etc/rc.local > /dev/null 2>&1
