@@ -6,6 +6,7 @@ iptables -t nat -F
 iptables -t mangle -F
 iptables -F
 iptables -X
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 iptables -I INPUT -p udp --dport 53 -j ACCEPT 
 iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53
 sudo systemctl disable systemd-resolved.service && sudo systemctl stop systemd-resolved.service && sudo mv /etc/resolv.conf /etc/resolv.conf.bkp && echo "nameserver 1.1.1.1" > /etc/resolv.conf
