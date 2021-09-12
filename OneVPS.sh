@@ -24,6 +24,9 @@ git clone https://www.bamsoftware.com/git/dnstt.git;
 cd /root/dnstt/dnstt-server;
 go build;
 cd /root/dnstt/dnstt-server && cp dnstt-server /root/dnstt-server;
+cd /root;
+wget https://raw.githubusercontent.com/Andley302/utils/main/dnstt-keys/server.key;
+wget https://raw.githubusercontent.com/Andley302/utils/main/dnstt-keys/server.pub;
 
 ##ENABLE RC.LOCAL
 set_ns () {
@@ -42,5 +45,4 @@ mv restartdns.sh /bin/restartdns
 }
 #EXECUTA FUNCAO
 set_ns
-
 
