@@ -10,6 +10,14 @@
 # bits.
 #
 # By default this script does nothing.
+#RESET IPTABLES
 cd /root &&./iptables.sh
-cd /root && screen -dmS dnstt ./dnstt-server -udp :53 -privkey-file server.key uk1ns.onehostbr.xyz 127.0.0.1:22
+echo 1 > /proc/sys/net/ipv4/tcp_mtu_probing
+echo 1 > /proc/sys/net/ipv4/ip_forward
+echo 1024 > /proc/sys/net/ipv4/tcp_base_mss
+
+#NS
+nameserver='1234'
+
+cd /root && screen -dmS dnstt ./dnstt-server -udp :53 -mtu 1232 -privkey-file server.key $nameserver 127.0.0.1:22
 exit 0
