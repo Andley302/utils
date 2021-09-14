@@ -38,7 +38,7 @@ apt-get purge dropbear -y;
 rm -rf /etc/default/dropbear;
 apt-get install dropbear -y;
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear;
-sed -i "s/DROPBEAR_PORT=22/DROPBEAR_PORT=7777" /etc/default/dropbear ;
+sed -i "s/DROPBEAR_PORT=22/DROPBEAR_PORT=7777/g" /etc/default/dropbear;
 #sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear ;
 grep -v "^PasswordAuthentication yes" /etc/ssh/sshd_config >/tmp/passlogin && mv /tmp/passlogin /etc/ssh/sshd_config;
 echo "PasswordAuthentication yes" >>/etc/ssh/sshd_config;
