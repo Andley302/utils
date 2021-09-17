@@ -1,5 +1,5 @@
 #!/bin/bash
-port=80
+port=$1
 while true
 do
 python /etc/CrashVPN/wsproxy.py $port
