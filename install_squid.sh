@@ -1,3 +1,4 @@
+#!/bin/bash
 clear
 echo "Squid 3.3.8 Installer";
 sleep 5;
