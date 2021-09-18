@@ -11,7 +11,7 @@ apt install dirmngr -y >/dev/null 2>&1
 [[ $(apt-key list 2>/dev/null | grep -c 'Ubuntu') == '0' ]] && {
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 >/dev/null 2>&1
 }
-}
+
 apt update -y >/dev/null 2>&1
 apt install squid3=3.3.8-1ubuntu6 squid=3.3.8-1ubuntu6 squid3-common=3.3.8-1ubuntu6 -y >/dev/null 2>&1
 wget -qO- https://raw.githubusercontent.com/rodrigo12xd/SSHPLUS/master/Install/squid3 >/etc/init.d/squid3
