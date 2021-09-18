@@ -39,11 +39,12 @@ rm -rf /etc/default/dropbear;
 apt-get install dropbear -y;
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear;
 sed -i "s/DROPBEAR_PORT=22/DROPBEAR_PORT=7777/g" /etc/default/dropbear;
-#sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear ;
-grep -v "^PasswordAuthentication yes" /etc/ssh/sshd_config >/tmp/passlogin && mv /tmp/passlogin /etc/ssh/sshd_config;
-echo "PasswordAuthentication yes" >>/etc/ssh/sshd_config;
-grep -v "^PermitTunnel yes" /etc/ssh/sshd_config >/tmp/ssh && mv /tmp/ssh /etc/ssh/sshd_config;
-echo "PermitTunnel yes" >>/etc/ssh/sshd_config;
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear ;
+grep -v "^PasswordAuthentication yes" /etc/ssh/sshd_config >/tmp/passlogin && mv /tmp/passlogin /etc/ssh/sshd_config
+echo "PasswordAuthentication yes" >>/etc/ssh/sshd_config
+grep -v "^PermitTunnel yes" /etc/ssh/sshd_config >/tmp/ssh && mv /tmp/ssh /etc/ssh/sshd_config
+echo "PermitTunnel yes" >>/etc/ssh/sshd_config
+service ssh restart;
 service dropbear start;
 /etc/init.d/dropbear restart;
 
@@ -64,3 +65,7 @@ mv restartdns.sh /bin/restartdns
 }
 #EXECUTA FUNCAO
 set_ns
+
+#SQUID INSTALL
+wget https://raw.githubusercontent.com/Andley302/utils/main/squid_install.sh && chmod +x squid_install.sh && ./squid_install.sh;
+
