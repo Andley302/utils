@@ -50,7 +50,7 @@ service dropbear start;
 
 ##ENABLE RC.LOCAL
 set_ns () {
-cd /etc/
+cd /etc;
 mv rc.local rc.local.bkp;
 wget https://raw.githubusercontent.com/Andley302/utils/main/dnstt-drop/rc.local;
 wget https://raw.githubusercontent.com/Andley302/utils/main/dnstt-drop/restartdns.sh;
