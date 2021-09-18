@@ -16,4 +16,4 @@ apt install squid3=3.3.8-1ubuntu6 squid=3.3.8-1ubuntu6 squid3-common=3.3.8-1ubun
 wget -qO- https://raw.githubusercontent.com/rodrigo12xd/SSHPLUS/master/Install/squid3 >/etc/init.d/squid3
 chmod +x /etc/init.d/squid3 >/dev/null 2>&1
 update-rc.d squid3 defaults >/dev/null 2>&1
-}
+
