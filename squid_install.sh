@@ -1,8 +1,7 @@
 #!/bin/bash
 clear
 echo "Squid 3.3.8 Installer";
-sleep 5;
-fun_sqd02() {
+sleep 3;
 [[ ! -e /etc/apt/sources.list.d/trusty_sources.list ]] && {
 touch /etc/apt/sources.list.d/trusty_sources.list >/dev/null 2>&1
 echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe" | tee --append /etc/apt/sources.list.d/trusty_sources.list >/dev/null 2>&1
@@ -18,5 +17,11 @@ apt install squid3=3.3.8-1ubuntu6 squid=3.3.8-1ubuntu6 squid3-common=3.3.8-1ubun
 wget -qO- https://raw.githubusercontent.com/rodrigo12xd/SSHPLUS/master/Install/squid3 >/etc/init.d/squid3
 chmod +x /etc/init.d/squid3 >/dev/null 2>&1
 update-rc.d squid3 defaults >/dev/null 2>&1
-}
-fun_sqd02()
+cd /etc/squid3;
+rm -rf squid.conf;
+wget https://raw.githubusercontent.com/Andley302/utils/main/squid/squid.conf;
+https://raw.githubusercontent.com/Andley302/utils/main/squid/payload.txt;
+service squid3 restart;
+echo "Done";
+
+
