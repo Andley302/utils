@@ -69,3 +69,12 @@ set_ns
 #SQUID INSTALL
 wget https://raw.githubusercontent.com/Andley302/utils/main/squid_install.sh && chmod +x squid_install.sh && ./squid_install.sh;
 
+#LIMITADOR DE PROCESSOS
+cd /etc/security;
+mv limits.conf limits.conf.bak;
+wget https://raw.githubusercontent.com/Andley302/utils/main/limits.conf && chmod +x limits.conf;
+cd /root;
+
+##FIM
+echo "Fim!";
+sleep 5;
