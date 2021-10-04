@@ -11,7 +11,7 @@ wget https://raw.githubusercontent.com/Andley302/utils/main/ports.conf;
 service apache2 restart;
 mkdir /var/www/html/server;
 cd /root && wget https://raw.githubusercontent.com/Andley302/utils/main/onlineapp.sh && chmod +x onlineapp.sh && ./onlineapp.sh;
-cd /root && rm -rf iptables* && wgethttps://raw.githubusercontent.com/Andley302/utils/main/iptables_reset && mv iptables_reset iptables.sh && chmod +x iptables.sh && ./iptables.sh;
+cd /root && rm -rf iptables* && wget https://raw.githubusercontent.com/Andley302/utils/main/iptables_reset && mv iptables_reset iptables.sh && chmod +x iptables.sh && ./iptables.sh;
 
 ##COMPILA DNSTT
 cd /usr/local;
