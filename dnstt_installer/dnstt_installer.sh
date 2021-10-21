@@ -38,8 +38,10 @@ mv restartdns.sh /bin/restartdns;
 }
 #EXECUTA FUNCAO
 set_ns
+cd /root;
 ##FIM
 echo "Finalizando....";
+restartdns.sh;
 sleep 5;
 clear;
 echo "";
