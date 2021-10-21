@@ -41,7 +41,7 @@ set_ns
 cd /root;
 ##FIM
 echo "Finalizando....";
-restartdns.sh;
+restartdns;
 sleep 5;
 clear;
 echo "";
