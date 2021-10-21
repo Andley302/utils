@@ -33,8 +33,8 @@ sed -i "s;1234;$nameserver;g" /etc/rc.local > /dev/null 2>&1
 sed -i "s;1234;$nameserver;g" restartdns.sh > /dev/null 2>&1
 systemctl enable rc-local;
 systemctl start rc-local;
-chmod +x restartdns.sh
-mv restartdns.sh /bin/restartdns
+chmod +x restartdns.sh;
+mv restartdns.sh /bin/restartdns;
 }
 #EXECUTA FUNCAO
 set_ns
