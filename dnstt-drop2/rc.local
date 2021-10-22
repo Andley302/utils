@@ -16,6 +16,9 @@ echo 1 > /proc/sys/net/ipv4/tcp_mtu_probing
 echo 1 > /proc/sys/net/ipv4/ip_forward
 echo 1024 > /proc/sys/net/ipv4/tcp_base_mss
 
+#SQUID
+service squid3 start;
+
 #NS
 nameserver='1234'
 
