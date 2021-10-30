@@ -1,11 +1,10 @@
 #!/bin/bash
 
 #Ask for password if necessary
-echo
 
 #Add Trusty Sources
-touch /etc/apt/sources.list.d/trusty_sources.list
-"deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe" | tee --append /etc/apt/sources.list.d/trusty_sources.list > /dev/null
+sudo touch /etc/apt/sources.list.d/trusty_sources.list
+echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe" | sudo tee --append /etc/apt/sources.list.d/trusty_sources.list > /dev/null
 
 #Update
 apt update
