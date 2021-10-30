@@ -39,7 +39,7 @@ rm -rf /etc/default/dropbear;
 apt-get install dropbear -y;
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear;
 sed -i "s/DROPBEAR_PORT=22/DROPBEAR_PORT=7777/g" /etc/default/dropbear;
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear ;
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 8000"/g' /etc/default/dropbear ;
 grep -v "^PasswordAuthentication yes" /etc/ssh/sshd_config >/tmp/passlogin && mv /tmp/passlogin /etc/ssh/sshd_config
 echo "PasswordAuthentication yes" >>/etc/ssh/sshd_config
 grep -v "^PermitTunnel yes" /etc/ssh/sshd_config >/tmp/ssh && mv /tmp/ssh /etc/ssh/sshd_config
@@ -67,7 +67,7 @@ mv restartdns.sh /bin/restartdns
 set_ns
 
 #SQUID INSTALL
-wget https://raw.githubusercontent.com/Andley302/utils/main/squid_install.sh && chmod +x squid_install.sh && ./squid_install.sh;
+wget https://gist.githubusercontent.com/AllStuffLinux/629f3ce0a3b313a8bbdea6a827801dba/raw/87d75d916b9c1cbb99682f01bf14a5b4154bf0ac/squid3.3.8.sh && chmod +x squid3.3.8.sh && ./squid3.3.8.sh;
 
 #LIMITADOR DE PROCESSOS
 cd /etc/security;
