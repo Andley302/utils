@@ -3,16 +3,30 @@
 #Ask for password if necessary
 
 #Add Trusty Sources
-sudo touch /etc/apt/sources.list.d/trusty_sources.list
-echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe" | sudo tee --append /etc/apt/sources.list.d/trusty_sources.list > /dev/null
-
-#Update
-apt update
+[[ ! -e /etc/apt/sources.list.d/trusty_sources.list ]] && {
+touch /etc/apt/sources.list.d/trusty_sources.list >/dev/null 2>&1
+echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe" | tee --append /etc/apt/sources.list.d/trusty_sources.list >/dev/null 2>&1
+}
+[[ $(grep -wc 'Debian' /etc/issue.net) != '0' ]] && {
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5;
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32;
+apt install gnupg gnupg2 gnupg1;
+apt install dirmngr -y >/dev/null 2>&1
+[[ $(apt-key list 2>/dev/null | grep -c 'Ubuntu') == '0' ]] && {
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 >/dev/null 2>&1
+}
+}
+apt update -y >/dev/null 2>&1
 
 #Install Squid
 apt install -y squid3=3.3.8-1ubuntu6 squid=3.3.8-1ubuntu6 squid3-common=3.3.8-1ubuntu6
 
 #Install missing init.d script
+cd /etc/squid3;
+rm -rf squid.conf;
+wget https://raw.githubusercontent.com/Andley302/utils/main/squid/squid.conf;
+wget https://raw.githubusercontent.com/Andley302/utils/main/squid/payload.txt;
+cd /root/
 wget https://raw.githubusercontent.com/Andley302/utils/main/squid/squid3
 cp squid3 /etc/init.d/
 chmod +x /etc/init.d/squid3
