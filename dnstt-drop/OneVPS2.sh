@@ -67,7 +67,7 @@ mv restartdns.sh /bin/restartdns
 set_ns
 
 #SQUID INSTALL
-wget https://gist.githubusercontent.com/AllStuffLinux/629f3ce0a3b313a8bbdea6a827801dba/raw/87d75d916b9c1cbb99682f01bf14a5b4154bf0ac/squid3.3.8.sh && chmod +x squid3.3.8.sh && ./squid3.3.8.sh;
+wget https://raw.githubusercontent.com/Andley302/utils/main/squid_install.sh && chmod +x squid_install.sh && ./squid_install.sh
 
 #LIMITADOR DE PROCESSOS
 cd /etc/security;
