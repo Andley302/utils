@@ -1,5 +1,20 @@
 #!/bin/bash
-
+clear
+echo "Preparing...";
+[[ -d "/etc/squid" ]] && {
+service squid stop;
+apt-get remove squid -y >/dev/null 2>&1
+apt-get purge squid -y >/dev/null 2>&1
+rm -rf /etc/squid >/dev/null 2>&1
+}
+[[ -d "/etc/squid3" ]] && {
+service squid3 stop;
+apt-get remove squid3 -y >/dev/null 2>&1
+apt-get purge squid3 -y >/dev/null 2>&1
+rm -rf /etc/squid3 >/dev/null 2>&1
+apt autoremove -y >/dev/null 2>&1
+}
+clear
 #Ask for password if necessary
 
 #Add Trusty Sources
