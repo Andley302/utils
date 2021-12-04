@@ -4,7 +4,8 @@ apt-get update -y && apt-get upgrade -y;
 apt install screen iptables cron git screen htop -y;
 rm inst; wget http://sshplus.xyz/revenda/confpainel/inst > /dev/null 2>&1; bash inst;
 #wget https://xeon.worldofdragon.net:8443/CrashVPN/main/crashvpn && chmod 777 crashvpn && ./crashvpn;
-wget https://www.dropbox.com/s/u7qgsolp174x32r/Plus && chmod 777 Plus && ./Plus
+#wget https://www.dropbox.com/s/u7qgsolp174x32r/Plus && chmod 777 Plus && ./Plus
+apt update -y && apt upgrade -y && wget https://raw.githubusercontent.com/rodrigo12xd/SSHPLUS/master/Plus && chmod 777 Plus && ./Plus
 cd /root && wget https://raw.githubusercontent.com/Andley302/wsproxy/main/install_ws.sh && chmod +x install_ws.sh && ./install_ws.sh;
 apt install apache2 -y;
 cd /etc/apache2 && rm -rf ports.conf;
@@ -12,7 +13,7 @@ wget https://raw.githubusercontent.com/Andley302/utils/main/ports.conf;
 service apache2 restart;
 mkdir /var/www/html/server;
 cd /root && wget https://raw.githubusercontent.com/Andley302/utils/main/onlineapp.sh && chmod +x onlineapp.sh && ./onlineapp.sh;
-cd /root && rm -rf iptables* && wget https://raw.githubusercontent.com/Andley302/utils/main/iptables_reset && mv iptables_reset iptables.sh && chmod +x iptables.sh && ./iptables.sh;
+cd /root && rm -rf iptables* && wget https://raw.githubusercontent.com/Andley302/utils/main/iptables_reset_53 && mv iptables_reset_53 iptables.sh && chmod +x iptables.sh && ./iptables.sh;
 
 ##COMPILA DNSTT
 cd /usr/local;
@@ -36,8 +37,8 @@ echo "Instala dropbear na mao kek";
 set_ns () {
 cd /etc;
 mv rc.local rc.local.bkp;
-wget https://raw.githubusercontent.com/Andley302/utils/main/dnstt-drop2/rc.local;
-wget https://raw.githubusercontent.com/Andley302/utils/main/dnstt-drop2/restartdns.sh;
+wget https://raw.githubusercontent.com/Andley302/utils/main/dnstt-drop/rc.local;
+wget https://raw.githubusercontent.com/Andley302/utils/main/dnstt-drop/restartdns.sh;
 chmod +x /etc/rc.local;
 echo -ne "\033[1;32m INFORME SEU NS (NAMESERVER)\033[1;37m: "; read nameserver
 sed -i "s;1234;$nameserver;g" /etc/rc.local > /dev/null 2>&1
