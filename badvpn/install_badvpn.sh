@@ -1,4 +1,5 @@
 #!/bin/bash
+clear;
 cd /bin;
 rm -rf antcrashudp.sh;
 rm -rf badvpn-udpgw;
