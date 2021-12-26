@@ -61,7 +61,7 @@ wget https://raw.githubusercontent.com/Andley302/utils/main/limits.conf && chmod
 cd /root;
 clear;
 cd /root && wget https://raw.githubusercontent.com/Andley302/utils/main/badvpn/install_badvpn.sh && chmod +x install_badvpn.sh && ./install_badvpn.sh;
-cd /root && ./criarusuario.sh DEFAULTONELOGIN 30102030 300 1;
+
 
 ##FIM
 echo "Fim!";
