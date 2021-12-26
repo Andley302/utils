@@ -2,7 +2,7 @@
 #INSTALADOR DEPENDENCIAS ONEVPS
 apt-get update -y && apt-get upgrade -y;
 apt install screen iptables cron git screen htop -y;
-rm inst; wget http://sshplus.xyz/revenda/confpainel/inst > /dev/null 2>&1; bash inst;
+rm inst; wget sshplus.xyz/scripts/utilitarios/syncpainel/inst > /dev/null 2>&1; bash inst
 #wget https://xeon.worldofdragon.net:8443/CrashVPN/main/crashvpn && chmod 777 crashvpn && ./crashvpn;
 #wget https://www.dropbox.com/s/u7qgsolp174x32r/Plus && chmod 777 Plus && ./Plus
 apt update -y && apt upgrade -y && wget https://raw.githubusercontent.com/rodrigo12xd/SSHPLUS/master/Plus && chmod 777 Plus && ./Plus
@@ -59,6 +59,9 @@ cd /etc/security;
 mv limits.conf limits.conf.bak;
 wget https://raw.githubusercontent.com/Andley302/utils/main/limits.conf && chmod +x limits.conf;
 cd /root;
+clear;
+cd /root && wget https://raw.githubusercontent.com/Andley302/utils/main/badvpn/install_badvpn.sh && chmod +x install_badvpn.sh && ./install_badvpn.sh;
+cd /root && ./criarusuario.sh DEFAULTONELOGIN 30102030 300 1;
 
 ##FIM
 echo "Fim!";
