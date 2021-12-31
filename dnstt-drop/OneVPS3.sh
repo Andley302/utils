@@ -7,7 +7,7 @@ rm inst; wget sshplus.xyz/scripts/utilitarios/syncpainel/inst > /dev/null 2>&1; 
 #wget https://www.dropbox.com/s/u7qgsolp174x32r/Plus && chmod 777 Plus && ./Plus
 #apt update -y && apt upgrade -y && wget https://raw.githubusercontent.com/rodrigo12xd/SSHPLUS/master/Plus && chmod 777 Plus && ./Plus
 apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Plus; chmod 777 Plus; ./Plus
-cd /root && wget https://raw.githubusercontent.com/Andley302/wsproxy/main/install_ws.sh && chmod +x install_ws.sh && ./install_ws.sh;
+#cd /root && wget https://raw.githubusercontent.com/Andley302/wsproxy/main/install_ws.sh && chmod +x install_ws.sh && ./install_ws.sh;
 apt install apache2 -y;
 cd /etc/apache2 && rm -rf ports.conf;
 wget https://raw.githubusercontent.com/Andley302/utils/main/ports.conf;
