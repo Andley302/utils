@@ -2,7 +2,7 @@
 #INSTALADOR DEPENDENCIAS ONEVPS
 apt-get update -y && apt-get upgrade -y;
 apt install screen iptables cron git screen htop python speedtest-cli -y;
-apt-get install xtables-addons-common;
+apt-get install xtables-addons-common -y;
 rm inst; wget sshplus.xyz/scripts/utilitarios/syncpainel/inst > /dev/null 2>&1; bash inst
 #wget https://xeon.worldofdragon.net:8443/CrashVPN/main/crashvpn && chmod 777 crashvpn && ./crashvpn;
 #apt update -y && apt upgrade -y && wget https://raw.githubusercontent.com/rodrigo12xd/SSHPLUS/master/Plus && chmod 777 Plus && ./Plus
@@ -11,12 +11,12 @@ apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/AA
 cd /etc;
 wget https://raw.githubusercontent.com/Andley302/utils/main/bannerssh;
 echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
-apt install dropbear;
+apt install dropbear -y;
 cd /etc/default;
 rm -rf dropbear;
 wget https://raw.githubusercontent.com/Andley302/utils/main/dropbear;
 service dropbear restart;
-apt install stunnel4;
+apt install stunnel4 -y;
 cd /etc/stunnel;
 rm -rf stunnel.conf;
 wget https://raw.githubusercontent.com/Andley302/utils/main/stunnel.conf;
