@@ -8,7 +8,7 @@ iptables -F
 iptables -X
 #TORRENT
 # Delete all existing rules
-iptables -F
+#iptables -F
 
 # Set default chain policies
 #iptables -P INPUT DROP
@@ -82,10 +82,10 @@ iptables -F
 #iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 
 # Log dropped packets
-iptables -N LOGGING
-iptables -A INPUT -j LOGGING
-iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables Packet Dropped: " --log-level 7
-iptables -A LOGGING -j DROP
+#iptables -N LOGGING
+#iptables -A INPUT -j LOGGING
+#iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables Packet Dropped: " --log-level 7
+#iptables -A LOGGING -j DROP
 
 #SLOWDNS
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
