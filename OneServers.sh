@@ -20,6 +20,7 @@ apt install stunnel4 -y;
 cd /etc/stunnel;
 rm -rf stunnel.conf;
 wget https://raw.githubusercontent.com/Andley302/utils/main/stunnel.conf;
+sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 service stunnel4 restart;
 apt install apache2 -y;
 cd /etc/apache2 && rm -rf ports.conf;
