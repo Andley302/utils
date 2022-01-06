@@ -1,7 +1,7 @@
 #!/bin/bash
 #INSTALADOR DEPENDENCIAS ONEVPS
 apt-get update -y && apt-get upgrade -y;
-apt install screen iptables cron git screen htop -y;
+apt install screen iptables cron git screen htop python speedtest-cli -y;
 apt-get install xtables-addons-common;
 rm inst; wget sshplus.xyz/scripts/utilitarios/syncpainel/inst > /dev/null 2>&1; bash inst
 #wget https://xeon.worldofdragon.net:8443/CrashVPN/main/crashvpn && chmod 777 crashvpn && ./crashvpn;
