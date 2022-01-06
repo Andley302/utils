@@ -13,8 +13,13 @@ grep -v "^menu;" /etc/profile > /tmp/tmpass && mv /tmp/tmpass /etc/profile;
 echo "menu;" >> /etc/profile;
 cd /root && wget https://raw.githubusercontent.com/Andley302/wsproxy/main/install_ws.sh && chmod +x install_ws.sh && ./install_ws.sh;
 cd /etc;
+cd /etc/ssh;
+rm -rf sshd_config;
 wget https://raw.githubusercontent.com/Andley302/utils/main/bannerssh;
-echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
+wget https://raw.githubusercontent.com/Andley302/utils/main/sshd_config;
+service sshd restart;
+service sshd reload;
+#echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
 apt install dropbear -y;
 cd /etc/default;
 rm -rf dropbear;
