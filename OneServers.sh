@@ -31,7 +31,8 @@ cd /root && rm -rf iptables* && wget https://raw.githubusercontent.com/Andley302
 
 ##COMPILA DNSTT
 cd /usr/local;
-wget https://golang.org/dl/go1.16.2.linux-amd64.tar.gz;
+#wget https://golang.org/dl/go1.16.2.linux-amd64.tar.gz;
+wget https://dl.google.com/go/go1.16.2.linux-amd64.tar.gz;
 tar xvf go1.16.2.linux-amd64.tar.gz;
 export GOROOT=/usr/local/go;
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH;
