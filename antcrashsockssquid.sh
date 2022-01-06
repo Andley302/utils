@@ -17,6 +17,6 @@ ulimit -u unlimited
 ulimit -v unlimited
 ulimit -x unlimited
 #python /etc/SSHPlus/proxy.py 8088;
-netstat -tlpn | grep -w 80 > /dev/null || python /etc/SSHPlus/proxy.py $port
+netstat -tlpn | grep -w 8088 > /dev/null || python /etc/SSHPlus/proxy.py $port
 sleep 1
 done
