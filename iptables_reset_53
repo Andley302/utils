@@ -16,8 +16,8 @@ iptables -P FORWARD DROP
 iptables -P OUTPUT DROP
 
 # Allow ALL incoming SSH
-#iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
 
 # MultiPorts (Allow incoming SSH, HTTP, and HTTPS)
 iptables -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443,2052,7777,7897,8080,8000,8777,8888 -m state --state NEW,ESTABLISHED -j ACCEPT
@@ -28,8 +28,8 @@ iptables -A OUTPUT -o eth0 -p tcp -m multiport --sports 22,80,443,2052,7777,7897
 #iptables -A OUTPUT -o eth0 -p tcp -m multiport --sports 800:820 -m state --state ESTABLISHED -j ACCEPT
 
 # Allow outgoing SSH
-#iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
 
 # Allow outgoing HTTPS
 iptables -A OUTPUT -o eth0 -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
