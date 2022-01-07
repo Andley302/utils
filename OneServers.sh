@@ -1,7 +1,7 @@
 #!/bin/bash
 #INSTALADOR DEPENDENCIAS ONEVPS
 apt-get update -y && apt-get upgrade -y;
-apt install screen iptables cron git screen htop python speedtest-cli -y;
+apt install screen iptables cron git screen htop python speedtest-cli ipset -y;
 #apt-get install xtables-addons-common -y;
 apt install make -y;
 apt install dkms -y;
