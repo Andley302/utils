@@ -25,10 +25,12 @@ cd /root && wget https://raw.githubusercontent.com/Andley302/wsproxy/main/instal
 cd /etc;
 cd /etc/ssh;
 rm -rf sshd_config;
-wget https://raw.githubusercontent.com/Andley302/utils/main/bannerssh;
 wget https://raw.githubusercontent.com/Andley302/utils/main/sshd_config;
 service sshd restart;
 service sshd reload;
+cd /etc;
+wget https://raw.githubusercontent.com/Andley302/utils/main/bannerssh;
+cd /root;
 #echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
 apt install dropbear -y;
 cd /etc/default;
