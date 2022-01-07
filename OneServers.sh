@@ -3,8 +3,10 @@
 apt-get update -y && apt-get upgrade -y;
 apt install screen iptables cron git screen htop python speedtest-cli ipset -y;
 #apt-get install xtables-addons-common -y;
+apt purge xtables* -y;
 apt install make -y;
 apt install dkms -y;
+apt install linux-headers-$(uname -r);
 cd /root;
 wget https://raw.githubusercontent.com/Andley302/utils/main/packages/xtables-addons-common_3.18-1_amd64.deb;
 wget https://raw.githubusercontent.com/Andley302/utils/main/packages/xtables-addons-dkms_3.18-1_all.deb;
