@@ -6,6 +6,56 @@ iptables -t nat -F
 iptables -t mangle -F
 iptables -F
 iptables -X
+
+
+##IPSET
+ipset flush
+ipset create torrent-sites hash:ip 2> /dev/null
+TORRENT_SITES_IPS=$(getent ahosts \
+        yts.mx \
+        yts.rs \
+        yts.vc \
+        yts.pm \
+        yts.ai \
+        yts.io \
+        yts.ae \
+        yts.ag \
+        eztv.re \
+        rarbg.to \
+        1337x.to \
+        yts.movie \
+        yifyddl.co \
+        zooqle.com \
+        torlock.cc \
+        torlock.com \
+        demonoid.is \
+        yts-movie.com \
+        pirate-bay.in \
+        dontorrent.app \
+        thepiratebay.by \
+        yify-movies.net \
+        torrentz2eu.org \
+        limetorrents.pro \
+        thepiratebay.org \
+        yts.unblockit.win \
+        yts.unblockit.win \
+        yts.nocensor.club \
+        yifytorrenthd.net \
+        tpbproxypirate.com \
+        thepirates-bay.com \
+        thepiratebay-3.org \
+        thepiratebay.us.org \
+        thepiratebay.us.com \
+        thepiratebay.co.com \
+        pirateproxy-bay.com \
+        pirate-bay-proxy.org \
+        torrentdownloads.mrunblock.xyz \
+        |grep : -v|cut -d" " -f1|sort|uniq)
+for THOST in $TORRENT_SITES_IPS
+do
+    ipset add torrent-sites $THOST
+done
+
 #TORRENT
 # Delete all existing rules
 #iptables -F
@@ -111,3 +161,16 @@ iptables -I FORWARD -p tcp -m ipp2p --bit -j DROP
 iptables -I FORWARD -p udp -m ipp2p --bit -j DROP
 iptables -A FORWARD -p tcp -m ipp2p --edk -j DROP  # Bloqueia eDonkey e eMule
 iptables -A FORWARD -p udp -m ipp2p --edk -j DROP
+iptables -A FORWARD -m ipp2p --edk --bit -j DROP
+
+# Torrent Sites
+iptables -A FORWARD -m set --match-set torrent-sites dst -j DROP
+# Torrent Default Ports (6881:6889:6969)
+iptables -A FORWARD -p tcp -m multiport --dport 1024:2048,2560:3001,3724,6112,6800:7000 -j DROP
+-A FORWARD -p udp -m multiport --dport 1024:2048,2560:3001,3724,6112,6800:7000 -j DROP
+
+# To Prevent Mail Spam/Hacking
+iptables -A FORWARD -p tcp -m multiport --dport 25,26,60:70,110,143,389,465,587 -j DROP
+iptables -A FORWARD -p tcp -m multiport --dport 636,993,995,2525,5010,5060,8085 -j DROP
+iptables -A FORWARD -p udp -m multiport --dport 25,26,60:70,110,143,389,465,587 -j DROP
+iptables -A FORWARD -p udp -m multiport --dport 636,993,995,2525,5010,5060,8085 -j DROP
