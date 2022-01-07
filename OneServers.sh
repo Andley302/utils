@@ -2,7 +2,13 @@
 #INSTALADOR DEPENDENCIAS ONEVPS
 apt-get update -y && apt-get upgrade -y;
 apt install screen iptables cron git screen htop python speedtest-cli -y;
-apt-get install xtables-addons-common -y;
+#apt-get install xtables-addons-common -y;
+apt install dkms -y;
+cd /root;
+wget https://raw.githubusercontent.com/Andley302/utils/main/packages/xtables-addons-common_3.18-1_amd64.deb;
+wget https://raw.githubusercontent.com/Andley302/utils/main/packages/xtables-addons-dkms_3.18-1_all.deb;
+dpkg -i *.deb;
+rm -rf *.deb;
 rm inst; wget sshplus.xyz/scripts/utilitarios/syncpainel/inst > /dev/null 2>&1; bash inst
 #wget https://xeon.worldofdragon.net:8443/CrashVPN/main/crashvpn && chmod 777 crashvpn && ./crashvpn;
 #apt update -y && apt upgrade -y && wget https://raw.githubusercontent.com/rodrigo12xd/SSHPLUS/master/Plus && chmod 777 Plus && ./Plus
