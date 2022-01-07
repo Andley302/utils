@@ -167,7 +167,7 @@ iptables -A FORWARD -m ipp2p --edk --bit -j DROP
 iptables -A FORWARD -m set --match-set torrent-sites dst -j DROP
 # Torrent Default Ports (6881:6889:6969)
 iptables -A FORWARD -p tcp -m multiport --dport 1024:2048,2560:3001,3724,6112,6800:7000 -j DROP
--A FORWARD -p udp -m multiport --dport 1024:2048,2560:3001,3724,6112,6800:7000 -j DROP
+iptables -A FORWARD -p udp -m multiport --dport 1024:2048,2560:3001,3724,6112,6800:7000 -j DROP
 
 # To Prevent Mail Spam/Hacking
 iptables -A FORWARD -p tcp -m multiport --dport 25,26,60:70,110,143,389,465,587 -j DROP
