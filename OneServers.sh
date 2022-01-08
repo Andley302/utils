@@ -184,7 +184,9 @@ fun_drop() {
 					sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear >/dev/null 2>&1
 					sed -i "s/DROPBEAR_PORT=22/DROPBEAR_PORT=$porta/g" /etc/default/dropbear >/dev/null 2>&1
 					sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear >/dev/null 2>&1
-					sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="/etc/bannerssh"/g' /etc/default/dropbear >/dev/null 2>&1
+					sed -i 's/DROPBEAR_BANNER=""//g' /etc/default/dropbear >/dev/null 2>&1
+					sed -i "$ a DROPBEAR_BANNER=\"/etc/bannerssh\"" /etc/default/dropbear;
+
 				}
 				echo ""
 				echo -e "\033[1;32mCONFIGURANDO PORTA DROPBEAR !\033[0m"
