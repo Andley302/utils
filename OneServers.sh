@@ -68,21 +68,111 @@ fun_bar() {
 
 #DROPBEAR
 clear
+fun_drop() {
+		if netstat -nltp | grep 'dropbear' 1>/dev/null 2>/dev/null; then
+			clear
+			[[ $(netstat -nltp | grep -c 'dropbear') != '0' ]] && dpbr=$(netstat -nplt | grep 'dropbear' | awk -F ":" {'print $4'} | xargs) || sqdp="\033[1;31mINDISPONIVEL"
+			if ps x | grep "limiter" | grep -v grep 1>/dev/null 2>/dev/null; then
+				stats='\033[1;32m◉ '
+			else
+				stats='\033[1;31m○ '
+			fi
+			echo -e "\E[44;1;37m              GERENCIAR DROPBEAR               \E[0m"
+			echo -e "\n\033[1;33mPORTAS\033[1;37m: \033[1;32m$dpbr"
+			echo ""
+			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mLIMITER DROPBEAR $stats\033[0m"
+			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA DROPBEAR\033[0m"
+			echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mREMOVER DROPBEAR\033[0m"
+			echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
+			echo ""
+			echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
+			read resposta
+			if [[ "$resposta" = '1' ]]; then
+				clear
+				if ps x | grep "limiter" | grep -v grep 1>/dev/null 2>/dev/null; then
+					echo -e "\033[1;32mParando o limiter... \033[0m"
+					echo ""
+					fun_stplimiter() {
+						pidlimiter=$(ps x | grep "limiter" | awk -F "pts" {'print $1'})
+						kill -9 $pidlimiter
+						screen -wipe
+					}
+					fun_bar 'fun_stplimiter' 'sleep 2'
+					echo -e "\n\033[1;31m LIMITER DESATIVADO \033[0m"
+					sleep 3
+					fun_drop
+				else
+					echo -e "\n\033[1;32mIniciando o limiter... \033[0m"
+					echo ""
+					fun_bar 'screen -d -m -t limiter droplimiter' 'sleep 3'
+					echo -e "\n\033[1;32m  LIMITER ATIVADO \033[0m"
+					sleep 3
+					fun_drop
+				fi
+			elif [[ "$resposta" = '2' ]]; then
+				echo ""
+				echo "\033[1;32mINSTALANDO DROPBEAR NA PORTA 7777\033[1;33m\033[1;37m "
+				#read pt
+				pt="7777";
+				echo ""
+				#verif_ptrs $pt
+				var1=$(grep 'DROPBEAR_PORT=' /etc/default/dropbear | cut -d'=' -f2)
+				echo -e "\033[1;32mALTERANDO PORTA DROPBEAR!"
+				sed -i "s/\b$var1\b/$pt/g" /etc/default/dropbear >/dev/null 2>&1
+				echo ""
+				fun_bar 'sleep 2'
+				echo -e "\n\033[1;32mREINICIANDO DROPBEAR!"
+				echo ""
+				fun_bar 'service dropbear restart' '/etc/init.d/dropbear restart'
+				echo -e "\n\033[1;32mPORTA ALTERADA COM SUCESSO!"
+				sleep 3
+				clear
+				#fun_conexao
+			elif [[ "$resposta" = '3' ]]; then
+				echo -e "\n\033[1;32mREMOVENDO O DROPBEAR !\033[0m"
+				echo ""
+				fun_dropunistall() {
+					service dropbear stop && /etc/init.d/dropbear stop
+					apt remove dropbear-run -y
+					apt remove dropbear -y
+					apt purge dropbear -y
+					rm -rf /etc/default/dropbear
+                    apt autoremove -y
+				}
+				fun_bar 'fun_dropunistall'
+				echo -e "\n\033[1;32mDROPBEAR REMOVIDO COM SUCESSO !\033[0m"
+				sleep 3
+				clear
+				#fun_conexao
+			elif [[ "$resposta" = '0' ]]; then
+				echo -e "\n\033[1;31mRetornando...\033[0m"
+				sleep 2
+				#fun_conexao
+			else
+				echo -e "\n\033[1;31mOpcao invalida...\033[0m"
+				sleep 2
+				#fun_conexao
+			fi
+		else
+			clear
 			echo -e "\E[44;1;37m           INSTALADOR DROPBEAR              \E[0m"
 			echo -e "\n\033[1;33mVC ESTA PRESTES A INSTALAR O DROPBEAR !\033[0m\n"
-			echo -ne "\033[1;32mDESEJA CONTINUAR \033[1;31m? \033[1;33m[s/n]:\033[1;37m "
-			read resposta
+			resposta="s";
+			#echo -ne "\033[1;32mDESEJA CONTINUAR \033[1;31m? \033[1;33m[s/n]:\033[1;37m "
+			#read resposta
 			[[ "$resposta" = 's' ]] && {
-				echo -e "\n\033[1;33mDEFINA UMA PORTA PARA O DROPBEAR !\033[0m\n"
-				echo -ne "\033[1;32mQUAL A PORTA \033[1;33m?\033[1;37m "
-				read porta
+			echo -e "\E[44;1;37m           INSTALADOR DROPBEAR PORTA 7777 E 8000             \E[0m"
+				#echo -e "\n\033[1;33mDEFINA UMA PORTA PARA O DROPBEAR !\033[0m\n"
+				#echo -ne "\033[1;32mQUAL A PORTA \033[1;33m?\033[1;37m "
+				#read porta
+				porta="7777";
 				[[ -z "$porta" ]] && {
 					echo -e "\n\033[1;31mPorta invalida!"
 					sleep 3
 					clear
-					fun_conexao
+					#fun_conexao
 				}
-				verif_ptrs $porta
+				#verif_ptrs $porta
 				echo -e "\n\033[1;32mINSTALANDO O DROPBEAR ! \033[0m"
 				echo ""
 				fun_instdrop() {
@@ -93,8 +183,8 @@ clear
 				fun_ports() {
 					sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear >/dev/null 2>&1
 					sed -i "s/DROPBEAR_PORT=22/DROPBEAR_PORT=$porta/g" /etc/default/dropbear >/dev/null 2>&1
-					sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 8000"/g' /etc/default/dropbear >/dev/null 2>&1
-          sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="/etc/bannerssh"/g' /etc/default/dropbear >/dev/null 2>&1
+					sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear >/dev/null 2>&1
+					sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="/etc/bannerssh"/g' /etc/default/dropbear >/dev/null 2>&1
 				}
 				echo ""
 				echo -e "\033[1;32mCONFIGURANDO PORTA DROPBEAR !\033[0m"
@@ -117,6 +207,18 @@ clear
 				[[ $(grep -c "/bin/false" /etc/shells) = '0' ]] && echo "/bin/false" >>/etc/shells
 				sleep 2
 				clear
+				#fun_conexao
+			} || {
+				echo""
+				echo -e "\033[1;31mRetornando...\033[0m"
+				sleep 3
+				clear
+				#fun_conexao
+			}
+		fi
+
+}
+fun_drop
 apt install stunnel4 -y;
 cd /etc/stunnel;
 rm -rf stunnel.conf;
