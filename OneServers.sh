@@ -32,11 +32,91 @@ cd /etc;
 wget https://raw.githubusercontent.com/Andley302/utils/main/bannerssh;
 cd /root;
 #echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
-apt install dropbear -y;
-cd /etc/default;
-rm -rf dropbear;
-wget https://raw.githubusercontent.com/Andley302/utils/main/dropbear;
-service dropbear restart;
+#apt install dropbear -y;
+#cd /etc/default;
+#rm -rf dropbear;
+#wget https://raw.githubusercontent.com/Andley302/utils/main/dropbear;
+#service dropbear restart;
+#BASE
+fun_bar() {
+		comando[0]="$1"
+		comando[1]="$2"
+		(
+			[[ -e $HOME/fim ]] && rm $HOME/fim
+			[[ ! -d /etc/SSHPlus ]] && rm -rf /bin/menu
+			${comando[0]} >/dev/null 2>&1
+			${comando[1]} >/dev/null 2>&1
+			touch $HOME/fim
+		) >/dev/null 2>&1 &
+		tput civis
+		echo -ne "\033[1;33mAGUARDE \033[1;37m- \033[1;33m["
+		while true; do
+			for ((i = 0; i < 18; i++)); do
+				echo -ne "\033[1;31m#"
+				sleep 0.1s
+			done
+			[[ -e $HOME/fim ]] && rm $HOME/fim && break
+			echo -e "\033[1;33m]"
+			sleep 1s
+			tput cuu1
+			tput dl1
+			echo -ne "\033[1;33mAGUARDE \033[1;37m- \033[1;33m["
+		done
+		echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
+		tput cnorm
+	}
+
+#DROPBEAR
+clear
+			echo -e "\E[44;1;37m           INSTALADOR DROPBEAR              \E[0m"
+			echo -e "\n\033[1;33mVC ESTA PRESTES A INSTALAR O DROPBEAR !\033[0m\n"
+			echo -ne "\033[1;32mDESEJA CONTINUAR \033[1;31m? \033[1;33m[s/n]:\033[1;37m "
+			read resposta
+			[[ "$resposta" = 's' ]] && {
+				echo -e "\n\033[1;33mDEFINA UMA PORTA PARA O DROPBEAR !\033[0m\n"
+				echo -ne "\033[1;32mQUAL A PORTA \033[1;33m?\033[1;37m "
+				read porta
+				[[ -z "$porta" ]] && {
+					echo -e "\n\033[1;31mPorta invalida!"
+					sleep 3
+					clear
+					fun_conexao
+				}
+				verif_ptrs $porta
+				echo -e "\n\033[1;32mINSTALANDO O DROPBEAR ! \033[0m"
+				echo ""
+				fun_instdrop() {
+					apt-get update -y
+					apt-get install dropbear -y
+				}
+				fun_bar 'fun_instdrop'
+				fun_ports() {
+					sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear >/dev/null 2>&1
+					sed -i "s/DROPBEAR_PORT=22/DROPBEAR_PORT=$porta/g" /etc/default/dropbear >/dev/null 2>&1
+					sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 8000"/g' /etc/default/dropbear >/dev/null 2>&1
+          sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="/etc/bannerssh"/g' /etc/default/dropbear >/dev/null 2>&1
+				}
+				echo ""
+				echo -e "\033[1;32mCONFIGURANDO PORTA DROPBEAR !\033[0m"
+				echo ""
+				fun_bar 'fun_ports'
+				grep -v "^PasswordAuthentication yes" /etc/ssh/sshd_config >/tmp/passlogin && mv /tmp/passlogin /etc/ssh/sshd_config
+				echo "PasswordAuthentication yes" >>/etc/ssh/sshd_config
+				grep -v "^PermitTunnel yes" /etc/ssh/sshd_config >/tmp/ssh && mv /tmp/ssh /etc/ssh/sshd_config
+				echo "PermitTunnel yes" >>/etc/ssh/sshd_config
+				echo ""
+				echo -e "\033[1;32mFINALIZANDO INSTALACAO !\033[0m"
+				echo ""
+				fun_ondrop() {
+				    service ssh restart
+					service dropbear start
+					/etc/init.d/dropbear restart
+				}
+				fun_bar 'fun_ondrop' 'sleep 1'
+				echo -e "\n\033[1;32mINSTALACAO CONCLUIDA \033[1;33mPORTA: \033[1;37m$porta\033[0m"
+				[[ $(grep -c "/bin/false" /etc/shells) = '0' ]] && echo "/bin/false" >>/etc/shells
+				sleep 2
+				clear
 apt install stunnel4 -y;
 cd /etc/stunnel;
 rm -rf stunnel.conf;
