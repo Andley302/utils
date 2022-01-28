@@ -2,7 +2,6 @@
 port=$1
 while true
 do
-#python /etc/CrashVPN/wsproxy.py $port
 ulimit -c unlimited
 ulimit -d unlimited
 ulimit -e unlimited
@@ -18,6 +17,7 @@ ulimit -t unlimited
 ulimit -u unlimited
 ulimit -v unlimited
 ulimit -x unlimited
-netstat -tlpn | grep -w 80 > /dev/null || python /etc/SSHPlus/wsproxy.py $port
+#python /etc/CrashVPN/wsproxy.py $port
+  netstat -tlpn | grep -w 80 > /dev/null || python /etc/SSHPlus/wsproxy.py $port
 sleep 1
 done
