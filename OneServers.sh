@@ -312,6 +312,7 @@ service spamassassin reload;
 spamassassin --lint;
 service spamassassin restart;
 service spamassassin reload;
+cd /root;
 
 ##FIM
 clear;
