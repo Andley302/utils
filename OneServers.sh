@@ -297,5 +297,23 @@ sudo install fast_linux_amd64 /usr/local/bin/fast;
 
 ##FIM
 clear;
+echo "Install spamassassin";
+sleep 3;
+apt-get install spamassassin spamc -y;
+cd /etc/default;
+rm -rf spamassassin;
+wget https://raw.githubusercontent.com/Andley302/utils/main/spamassassin
+cd /etc/spamassassin;
+rm -rf local.cf;
+wget https://raw.githubusercontent.com/Andley302/utils/main/local.cf;
+spamassassin --lint;
+service spamassassin restart;
+service spamassassin reload;
+spamassassin --lint;
+service spamassassin restart;
+service spamassassin reload;
+
+##FIM
+clear;
 echo "Fim!";
 sleep 5;
