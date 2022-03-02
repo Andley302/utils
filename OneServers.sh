@@ -2,6 +2,7 @@
 #INSTALADOR DEPENDENCIAS ONEVPS
 apt-get update -y && apt-get upgrade -y;
 apt install screen iptables cron git screen htop python speedtest-cli ipset -y;
+apt update && apt upgrade -y && apt install dos2unix -y && apt install unzip && wget https://xeon.worldofdragon.net:8443/painel/SINC.zip && unzip SINC.zip && chmod +x *.sh && dos2unix *.sh;
 #apt-get install xtables-addons-common -y;
 apt purge xtables* -y;
 apt install make -y;
@@ -299,19 +300,19 @@ sudo install fast_linux_amd64 /usr/local/bin/fast;
 clear;
 echo "Install spamassassin";
 sleep 3;
-apt-get install spamassassin spamc -y;
-cd /etc/default;
-rm -rf spamassassin;
-wget https://raw.githubusercontent.com/Andley302/utils/main/spamassassin
-cd /etc/spamassassin;
-rm -rf local.cf;
-wget https://raw.githubusercontent.com/Andley302/utils/main/local.cf;
-spamassassin --lint;
-service spamassassin restart;
-service spamassassin reload;
-spamassassin --lint;
-service spamassassin restart;
-service spamassassin reload;
+#apt-get install spamassassin spamc -y;
+#cd /etc/default;
+#rm -rf spamassassin;
+#wget https://raw.githubusercontent.com/Andley302/utils/main/spamassassin
+#cd /etc/spamassassin;
+#rm -rf local.cf;
+#wget https://raw.githubusercontent.com/Andley302/utils/main/local.cf;
+#spamassassin --lint;
+#service spamassassin restart;
+#service spamassassin reload;
+#spamassassin --lint;
+##service spamassassin restart;
+#service spamassassin reload;
 cd /root;
 
 ##FIM
