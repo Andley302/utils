@@ -25,6 +25,7 @@ apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/AA
 ##AUTO EXEC
 grep -v "^menu;" /etc/profile > /tmp/tmpass && mv /tmp/tmpass /etc/profile;
 echo "menu;" >> /etc/profile;
+cd /etc/SSHPlus && rm -rf wsproxy.py;
 cd /root && wget https://raw.githubusercontent.com/Andley302/wsproxy/main/install_ws.sh && chmod +x install_ws.sh && ./install_ws.sh;
 cd /etc;
 cd /etc/ssh;
