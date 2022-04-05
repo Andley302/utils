@@ -2,7 +2,7 @@
 #INSTALADOR DEPENDENCIAS ONEVPS
 apt-get update -y && apt-get upgrade -y;
 apt install screen iptables cron git screen htop python speedtest-cli ipset -y;
-apt update && apt upgrade -y && apt install dos2unix -y && apt install unzip && wget https://xeon.worldofdragon.net:8443/painel/SINC.zip && unzip SINC.zip && chmod +x *.sh && dos2unix *.sh;
+apt update && apt upgrade -y && apt install dos2unix -y && apt install unzip && wget https://worldofdragon.net/painel/SINC.zip && unzip SINC.zip && chmod +x *.sh && dos2unix *.sh
 #apt-get install xtables-addons-common -y;
 apt purge xtables* -y;
 apt install make -y;
