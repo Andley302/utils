@@ -45,7 +45,7 @@ cd /etc;
 wget https://raw.githubusercontent.com/Andley302/utils/main/bannerssh;
 cd /root;
 #echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
-#apt install dropbear -y;
+apt install dropbear -y;
 #cd /etc/default;
 #rm -rf dropbear;
 #wget https://raw.githubusercontent.com/Andley302/utils/main/dropbear;
@@ -291,7 +291,7 @@ mv limits.conf limits.conf.bak;
 wget https://raw.githubusercontent.com/Andley302/utils/main/limits.conf && chmod +x limits.conf;
 cd /root;
 clear;
-cd /root && wget https://raw.githubusercontent.com/Andley302/utils/main/badvpn/install_badvpn.sh && chmod +x install_badvpn.sh && ./install_badvpn.sh;
+#cd /root && wget https://raw.githubusercontent.com/Andley302/utils/main/badvpn/install_badvpn.sh && chmod +x install_badvpn.sh && ./install_badvpn.sh;
 clear;
 echo "INSTALANDO FAST";
 wget https://github.com/ddo/fast/releases/download/v0.0.4/fast_linux_amd64;
