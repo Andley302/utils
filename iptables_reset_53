@@ -175,6 +175,22 @@ iptables -A FORWARD -p tcp -m multiport --dport 636,993,995,2525,5010,5060,8085 
 iptables -A FORWARD -p udp -m multiport --dport 25,26,60:70,110,143,389,465,587 -j DROP
 iptables -A FORWARD -p udp -m multiport --dport 636,993,995,2525,5010,5060,8085 -j DROP
 
+#ulimit -n 1000000 && sysctl -w fs.file-max=1000000
+#PROCESS LIMITS
+ulimit -c unlimited
+ulimit -d unlimited
+ulimit -e unlimited
+ulimit -f unlimited
+ulimit -i unlimited
+ulimit -l unlimited
+ulimit -m unlimited
 ulimit -n 1000000 && sysctl -w fs.file-max=1000000
+ulimit -q unlimited
+ulimit -r unlimited
+ulimit -s unlimited
+ulimit -t unlimited
+ulimit -u unlimited
+ulimit -v unlimited
+ulimit -x unlimited
 
 #service stunnel4 stop && service stunnel4 start;
