@@ -138,7 +138,7 @@ done
 #iptables -A LOGGING -j DROP
 
 #SLOWDNS
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+#iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 iptables -I INPUT -p udp --dport 53 -j ACCEPT 
 iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53
 
@@ -174,3 +174,7 @@ iptables -A FORWARD -p tcp -m multiport --dport 25,26,60:70,110,143,389,465,587 
 iptables -A FORWARD -p tcp -m multiport --dport 636,993,995,2525,5010,5060,8085 -j DROP
 iptables -A FORWARD -p udp -m multiport --dport 25,26,60:70,110,143,389,465,587 -j DROP
 iptables -A FORWARD -p udp -m multiport --dport 636,993,995,2525,5010,5060,8085 -j DROP
+
+ulimit -n 1000000 && sysctl -w fs.file-max=1000000
+
+service stunnel4 stop && service stunnel4 start;
