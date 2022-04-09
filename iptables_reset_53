@@ -56,86 +56,6 @@ do
     ipset add torrent-sites $THOST
 done
 
-#TORRENT
-# Delete all existing rules
-#iptables -F
-
-# Set default chain policies
-#iptables -P INPUT DROP
-#iptables -P FORWARD DROP
-#iptables -P OUTPUT DROP
-
-# Allow ALL incoming SSH
-#iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
-
-# MultiPorts (Allow incoming SSH, HTTP, and HTTPS)
-#iptables -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443,2052,7777,7897,8080,8000,8777,8888 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A OUTPUT -o eth0 -p tcp -m multiport --sports 22,80,443,2052,7777,7897,8080,8000,8777,8888 -m state --state ESTABLISHED -j ACCEPT
-
-# Allow All custom proxy ports
-#iptables -A INPUT -i eth0 -p tcp -m multiport --dports 800:820 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A OUTPUT -o eth0 -p tcp -m multiport --sports 800:820 -m state --state ESTABLISHED -j ACCEPT
-
-# Allow outgoing SSH
-#iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
-
-# Allow outgoing HTTPS
-#iptables -A OUTPUT -o eth0 -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT
-
-#iptables -A OUTPUT -o eth0 -p tcp --dport 7897 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 7897 -m state --state ESTABLISHED -j ACCEPT
-
-#iptables -A OUTPUT -o eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
-
-#iptables -A OUTPUT -o eth0 -p tcp --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 8080 -m state --state ESTABLISHED -j ACCEPT
-
-#iptables -A OUTPUT -o eth0 -p tcp --dport 2052 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 2052 -m state --state ESTABLISHED -j ACCEPT
-
-#iptables -A OUTPUT -o eth0 -p tcp --dport 7777 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 7777 -m state --state ESTABLISHED -j ACCEPT
-
-#iptables -A OUTPUT -o eth0 -p tcp --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 8080 -m state --state ESTABLISHED -j ACCEPT
-
-#iptables -A OUTPUT -o eth0 -p tcp --dport 8000 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 8000 -m state --state ESTABLISHED -j ACCEPT
-
-#iptables -A OUTPUT -o eth0 -p tcp --dport 8777 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 8777 -m state --state ESTABLISHED -j ACCEPT
-
-#iptables -A OUTPUT -o eth0 -p tcp --dport 8888 -m state --state NEW,ESTABLISHED -j ACCEPT
-#iptables -A INPUT -i eth0 -p tcp --sport 8888 -m state --state ESTABLISHED -j ACCEPT
-
-# Ping from inside to outside
-#iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
-#iptables -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
-
-# Ping from outside to inside
-#iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
-#iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT
-
-# Allow loopback access
-#iptables -A INPUT -i lo -j ACCEPT
-#iptables -A OUTPUT -o lo -j ACCEPT
-
-# Allow outbound DNS
-#iptables -A OUTPUT -p udp -o eth0 --dport 53 -j ACCEPT
-#iptables -A INPUT -p udp -i eth0 --sport 53 -j ACCEPT
-
-# Prevent DoS attack
-#iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
-
-# Log dropped packets
-#iptables -N LOGGING
-#iptables -A INPUT -j LOGGING
-#iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables Packet Dropped: " --log-level 7
-#iptables -A LOGGING -j DROP
 
 #SLOWDNS
 #iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
@@ -143,16 +63,13 @@ iptables -I INPUT -p udp --dport 53 -j ACCEPT
 iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53
 
 #PORTS REDIRECT
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 80
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8880 -j REDIRECT --to-port 80
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2052 -j REDIRECT --to-port 80
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2082 -j REDIRECT --to-port 80
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2086 -j REDIRECT --to-port 80
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2095 -j REDIRECT --to-port 80
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8088 -j REDIRECT --to-port 80
-#SSL
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2053 -j REDIRECT --to-port 80
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2083 -j REDIRECT --to-port 80
+iptables -t nat -I PREROUTING -p tcp --dport 8080 -j REDIRECT --to-ports 80
+iptables -t nat -I PREROUTING -p tcp --dport 8880 -j REDIRECT --to-ports 80
+iptables -t nat -I PREROUTING -p tcp --dport 2052 -j REDIRECT --to-ports 80
+iptables -t nat -I PREROUTING -p tcp --dport 2082 -j REDIRECT --to-ports 80
+iptables -t nat -I PREROUTING -p tcp --dport 2086 -j REDIRECT --to-ports 80
+iptables -t nat -I PREROUTING -p tcp --dport 2095 -j REDIRECT --to-ports 80
+iptables -t nat -I PREROUTING -p tcp --dport 8088 -j REDIRECT --to-ports 80
 
 systemctl disable systemd-resolved.service && systemctl stop systemd-resolved.service && mv /etc/resolv.conf /etc/resolv.conf.bkp && echo "nameserver 1.1.1.1" > /etc/resolv.conf
 systemctl enable systemd-resolved.service && systemctl start systemd-resolved.service
@@ -187,7 +104,6 @@ iptables -A FORWARD -p tcp -m multiport --dport 636,993,995,2525,5010,5060,8085 
 iptables -A FORWARD -p udp -m multiport --dport 25,26,60:70,110,143,389,465,587 -j DROP
 iptables -A FORWARD -p udp -m multiport --dport 636,993,995,2525,5010,5060,8085 -j DROP
 
-#ulimit -n 1000000 && sysctl -w fs.file-max=1000000
 #PROCESS LIMITS
 ulimit -c unlimited
 ulimit -d unlimited
@@ -205,5 +121,5 @@ ulimit -u unlimited
 ulimit -v unlimited
 ulimit -x unlimited
 
-
+#REINICIA STUNNEL EM CASO DELE NAO INICIAR
 #service stunnel4 stop && service stunnel4 start;
