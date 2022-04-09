@@ -142,6 +142,15 @@ done
 iptables -I INPUT -p udp --dport 53 -j ACCEPT 
 iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53
 
+#PORTS REDIRECT
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 80
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8880 -j REDIRECT --to-port 80
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2052 -j REDIRECT --to-port 80
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2082 -j REDIRECT --to-port 80
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2086 -j REDIRECT --to-port 80
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2095 -j REDIRECT --to-port 80
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8088 -j REDIRECT --to-port 80
+
 systemctl disable systemd-resolved.service && systemctl stop systemd-resolved.service && mv /etc/resolv.conf /etc/resolv.conf.bkp && echo "nameserver 1.1.1.1" > /etc/resolv.conf
 systemctl enable systemd-resolved.service && systemctl start systemd-resolved.service
 systemctl stop systemd-resolved
@@ -192,5 +201,6 @@ ulimit -t unlimited
 ulimit -u unlimited
 ulimit -v unlimited
 ulimit -x unlimited
+
 
 #service stunnel4 stop && service stunnel4 start;
