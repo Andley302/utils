@@ -29,4 +29,4 @@ echo
 echo "✅ Usuário de e-mail ${EMAIL} criado com sucesso!"
 echo "📂 Diretório de e-mail: $MAILDIR"
 echo "📬 Para testar com mutt:"
-echo "    mutt -f imaps://${EMAIL}@localhost"
+echo "    mutt -f imaps://${EMAIL}"
