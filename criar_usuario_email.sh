@@ -1,7 +1,7 @@
 #!/bin/bash
 
 read -p "Digite o nome do usuário (ex: user): " USUARIO
-DOMINIO="onehostapps.com"
+DOMINIO="connectifytech.com"
 EMAIL="${USUARIO}@${DOMINIO}"
 
 read -s -p "Digite a senha para ${EMAIL}: " SENHA
